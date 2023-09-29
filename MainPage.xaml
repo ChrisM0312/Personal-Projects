@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Gym_App_MVVM_V1.ViewModel"
+             xmlns:models="clr-namespace:Gym_App_MVVM_V1.Model"
+             xmlns:local="clr-namespace:Gym_App_MVVM_V1"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Gym_App_MVVM_V1.MainPage">
+
+    <ContentPage.Resources>
+        <c:WorkoutGroupsViewModel x:Key="WorkoutGroupsViewModelData"/>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Margin="20">
+
+        <Picker
+            Title="Select a workout group"
+            x:Name="GroupPicker"
+            HorizontalTextAlignment="Center"
+            BindingContext="{Binding Source = {c:WorkoutGroupsViewModel}}"
+            ItemsSource="{Binding WorkoutGroups}"
+            ItemDisplayBinding="{Binding NameOfWorkoutGroup}"
+            Margin="25,0,25,25"
+            ios:Picker.UpdateMode="Immediately"
+            SelectedIndexChanged="GroupPicker_SelectedIndexChanged"
+            BackgroundColor="Gray">
+        </Picker>
+
+        <Grid x:Name="WorkoutGroupButtons" IsVisible="true" ColumnSpacing="25" Margin="25,0,25,20">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button 
+                Text="Add group"
+                x:Name="AddWorkoutGroup"
+                Clicked="AddWorkoutGroupClicked"
+                TextColor="White"
+                BackgroundColor="DarkBlue"
+                VerticalOptions="Center">
+            </Button>
+
+            <Button Text="Remove group"
+                Grid.Column="1"
+                x:Name="RemoveWorkoutGroup"
+                Clicked="RemoveWorkoutGroupClicked"
+                TextColor="White"
+                BackgroundColor="DarkBlue"
+                VerticalOptions="Center">
+            </Button>
+            
+        </Grid>
+
+        <Picker 
+                Title="Select a workout"
+                x:Name="WorkoutPicker"
+                HorizontalTextAlignment="Center"
+                Margin="25,0,25,25"
+                ios:Picker.UpdateMode="Immediately"
+                SelectedIndexChanged="WorkoutPicker_SelectedIndexChanged"
+                BackgroundColor="Gray"
+                IsVisible="false">
+        </Picker>
+
+        <Grid x:Name="WorkoutButtons" IsVisible="false" ColumnSpacing="25" Margin="25,0,25,20">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button 
+                Text="Add workout"
+                x:Name="AddWorkout"
+                Clicked="AddWorkoutClicked"
+                TextColor="White"
+                BackgroundColor="DarkBlue"
+                VerticalOptions="Center">
+            </Button>
+
+            <Button 
+                Text="Remove workout"
+                Grid.Column="1"
+                x:Name="RemoveWorkout"
+                Clicked="RemoveWorkoutClicked"
+                TextColor="white"
+                BackgroundColor="DarkBlue"
+                VerticalOptions="Center">
+            </Button>
+
+        </Grid>
+
+
+        <Grid x:Name="WorkoutGrid" IsVisible="false" Margin="25" RowSpacing="2" ColumnSpacing="2" BackgroundColor="Black">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="First" Grid.Column="1" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="Max" Grid.Column="2" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="Last" Grid.Column="3" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="New" Grid.Column="4" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="Weight" Grid.Row="1" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="Sets" Grid.Row="2" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="Reps" Grid.Row="3" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="FirstWeight" Grid.Column="1"  Grid.Row="1" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="FirstSets" Grid.Column="1"  Grid.Row="2" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="FirstReps" Grid.Column="1"  Grid.Row="3" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="MaxWeight" Grid.Column="2"  Grid.Row="1" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="MaxSets" Grid.Column="2"  Grid.Row="2" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="MaxReps" Grid.Column="2"  Grid.Row="3" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="LastWeight" Grid.Column="3"  Grid.Row="1" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="LastSets" Grid.Column="3"  Grid.Row="2" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="" x:Name="LastReps" Grid.Column="3"  Grid.Row="3" TextColor="White" BackgroundColor="DarkBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+            <Entry x:Name="Weight"
+                Margin="1"
+                Keyboard="Numeric"
+                Grid.Column="4"
+                Grid.Row="1"
+                Text="0"
+                BackgroundColor="DarkBlue"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center">
+            </Entry>
+
+            <Entry x:Name="Reps"
+                Margin="1"
+                Keyboard="Numeric"
+                Grid.Column="4"
+                Grid.Row="2"
+                Text="0"
+                BackgroundColor="DarkBlue"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center">
+            </Entry>
+            
+            <Entry 
+                x:Name="Sets"
+                Margin="1"
+                Keyboard="Numeric"
+                Grid.Column="4"
+                Grid.Row="3"
+                Text="0"
+                BackgroundColor="DarkBlue"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center">
+            </Entry>
+
+        </Grid>
+
+        <Button 
+            x:Name="SubmitButton"
+            IsVisible="false"
+            Text="Submit"
+            Padding="25"
+            Clicked="SubmitClicked"
+            TextColor="White"
+            BackgroundColor="DarkBlue"
+            VerticalOptions="Center"
+            Margin="20">
+        </Button>
+        
+    </VerticalStackLayout>
+
+</ContentPage>
